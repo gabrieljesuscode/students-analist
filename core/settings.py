@@ -27,7 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+# Permite que o Django aceite requisições POST do seu IP externo
+CSRF_TRUSTED_ORIGINS = [
+    'http://8.235.102.24',
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +43,8 @@ INSTALLED_APPS = [
     'alunos',
     "corsheaders",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
