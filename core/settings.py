@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'alunos',
     "corsheaders",
+    "django_tailwind_cli",
 ]
+
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -133,3 +136,11 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+
+TAILWIND_CLI_INPUT = BASE_DIR / 'assets' / 'css' / 'input.css'
+TAILWIND_CLI_OUTPUT = BASE_DIR / 'static' / 'css' / 'tailwind.css'
+
+
+STATICFILES_DIRS = [BASE_DIR / 'static']

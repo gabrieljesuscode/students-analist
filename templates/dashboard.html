@@ -1,13 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Logos - Acompanhamento Acadêmico</title>
+
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+
 </head>
 
 <body>
+    <header class="w-screen bg-amber-950 h-3.5">
+        <h1 class="w-full h-fit text-red-500">
+            Logos — Acompanhamento Acadêmico
+        </h1>
 
-    <h1>Logos — Acompanhamento Acadêmico</h1>
+    </header>
 
     <h2>Bem-vindo!</h2>
 
@@ -15,32 +23,32 @@
 
     <h2>Alunos cadastrados</h2>
 
-    <ul>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Turma</th>
+                <th>Frequência</th>
+                <th>Situação</th>
+                <th>Notas</th>
+            </tr>
+        </thead>
+        <tbody>
 {% for aluno in alunos %}
-
-    <h3>{{ aluno.nome }}</h3>
-
-    <p>
-        Turma: {{ aluno.turma }} |
-        Frequência: {{ aluno.frequencia }}% |
-        Situação: {{ aluno.status }}
-    </p>
-
-    <h4>Notas</h4>
-
-    <ul>
-        {% for nota in aluno.notas.all %}
-            <li>
-                {{ nota.disciplina }}:
-                {{ nota.nota1 }} -
-                {{ nota.nota2 }} -
-                Média: {{ nota.media }}
-            </li>
-        {% endfor %}
-    </ul>
-
+            <tr>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.turma }}</td>
+                <td>{{ aluno.frequencia }}%</td>
+                <td>{{ aluno.status }}</td>
+                <td>
+                    {% for nota in aluno.notas.all %}
+                        {{ nota.disciplina }}: {{ nota.nota1 }} - {{ nota.nota2 }} (Média: {{ nota.media }}) <br>
+                    {% endfor %}
+                </td>
+            </tr>
 {% endfor %}
-    </ul>
+        </tbody>
+    </table>
 
 </body>
 </html>

@@ -18,18 +18,20 @@ jobs:
                 username: ${{ secrets.VM_USER }}
                 key: ${{ secrets.SSH_PRIVATE_KEY }}
                 script: |
-                    set -e  
-                    
+                    set -e
                     cd /home/gabriel053jesus/students-analist
-                    
                     
                     git reset --hard HEAD
                     git pull origin main
                     
                     source venv/bin/activate
                     pip install -r requirements.txt
+                    
+                    # BAIXA O CLI E COMPILA O CSS NA VM
+                    python manage.py tailwind download_cli
+                    python manage.py tailwind build
+                    
                     python manage.py migrate
                     python manage.py collectstatic --noinput
                     sudo systemctl restart gunicorn
-                    
                     echo "✅ Deploy concluído com sucesso!"
