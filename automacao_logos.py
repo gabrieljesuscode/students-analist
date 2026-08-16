@@ -1,5 +1,3 @@
-import csv
-
 dados_alunos = [
     {"nome": "Gabriel Jesus", "nota1": 8.5, "nota2": 9.0, "frequencia": 95},
     {"nome": "João Silva", "nota1": 4.0, "nota2": 5.5, "frequencia": 70},
