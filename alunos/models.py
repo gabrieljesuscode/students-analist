@@ -18,6 +18,25 @@ class Aluno(models.Model):
 
 		return False
 
+	
+
+	def motivos_risco(self):
+		motivos = []
+
+		if self.frequencia < 75:
+			motivos.append(
+				"Frequência abaixo de 75%"
+				)
+
+		for nota in self.notas.all():
+			if nota.media() < 7:
+				motivos.append(
+					f"Média baixa em {nota.disciplina}"
+					)
+
+		return motivos
+
+	
 
 	def __str__(self):
 		return self.nome
