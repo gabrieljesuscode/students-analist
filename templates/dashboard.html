@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Logos - Acompanhamento Acadêmico</title>
+</head>
+
+<body>
+
+    <h1>Logos — Acompanhamento Acadêmico</h1>
+
+    <h2>Bem-vindo!</h2>
+
+    <p>Acompanhe o desempenho acadêmico dos alunos.</p>
+
+    <h2>Alunos cadastrados</h2>
+
+    <ul>
+{% for aluno in alunos %}
+
+    <h3>{{ aluno.nome }}</h3>
+
+    <p>
+        Turma: {{ aluno.turma }} |
+        Frequência: {{ aluno.frequencia }}% |
+        Situação: {{ aluno.status }}
+    </p>
+
+    <h4>Notas</h4>
+
+    <ul>
+        {% for nota in aluno.notas.all %}
+            <li>
+                {{ nota.disciplina }}:
+                {{ nota.nota1 }} -
+                {{ nota.nota2 }} -
+                Média: {{ nota.media }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endfor %}
+    </ul>
+
+</body>
+</html>
