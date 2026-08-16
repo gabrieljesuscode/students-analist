@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Aluno
 
 # Create your views here.
@@ -18,3 +18,11 @@ def dashboard(request):
 	})
 
 
+
+def detalhe_aluno(request, id):
+
+	aluno = get_object_or_404(Aluno, id=id)
+
+	return render(request, "detalhe_aluno.html", {
+		"aluno": aluno
+	})

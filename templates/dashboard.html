@@ -40,9 +40,9 @@
 
                 <div class="divide-y divide-gray-200">
                     {% for aluno in alunos %}
-                    <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center justify-between py-3 ">
                         <div class="flex-1">
-                            <p class="font-medium text-gray-800">{{ aluno.nome }}</p>
+                            <p class="font-medium text-gray-800"><a href="{% url 'detalhe_aluno' aluno.id %}">{{ aluno.nome }}</a></p>
                             <p class="text-xs text-gray-500">{{ aluno.turma }}</p>
                         </div>
 

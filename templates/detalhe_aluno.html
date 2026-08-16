@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ aluno.nome }} - Logos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="min-h-screen p-6">
+
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow border border-gray-200">
+
+            <header class="border-b border-gray-200 p-6">
+                <a href="{% url 'dashboard' %}"
+                   class="text-sm text-blue-600 hover:underline">
+                    ← Voltar
+                </a>
+
+                <h1 class="text-2xl font-bold text-gray-800 mt-4">
+                    {{ aluno.nome }}
+                </h1>
+
+                <p class="text-gray-500">
+                    Matrícula: {{ aluno.matricula }}
+                </p>
+
+                <p class="text-gray-500">
+                    Turma: {{ aluno.turma }}
+                </p>
+            </header>
+
+            <main class="p-6">
+
+                <div class="grid grid-cols-2 gap-4">
+
+                    <div class="border rounded-lg p-4">
+                        <p class="text-sm text-gray-500">
+                            Frequência
+                        </p>
+
+                        <p class="text-2xl font-bold">
+                            {{ aluno.frequencia }}%
+                        </p>
+                    </div>
+
+                    <div class="border rounded-lg p-4">
+                        <p class="text-sm text-gray-500">
+                            Situação
+                        </p>
+
+                        {% if aluno.esta_em_risco %}
+                            <p class="text-2xl font-bold text-red-600">
+                                🔴 EM RISCO
+                            </p>
+                        {% else %}
+                            <p class="text-2xl font-bold text-green-600">
+                                ✅ OK
+                            </p>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <h2 class="text-lg font-semibold mt-8 mb-4">
+                    Notas
+                </h2>
+
+                <div class="divide-y">
+
+                    {% for nota in aluno.notas.all %}
+
+                    <div class="py-4 flex justify-between">
+
+                        <div>
+                            <p class="font-medium">
+                                {{ nota.disciplina }}
+                            </p>
+
+                            <p class="text-sm text-gray-500">
+                                {{ nota.nota1 }} - {{ nota.nota2 }}
+                            </p>
+                        </div>
+
+                        <div class="font-bold">
+                            {{ nota.media|floatformat:1 }}
+                        </div>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p class="text-gray-500">
+                        Nenhuma nota cadastrada.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
