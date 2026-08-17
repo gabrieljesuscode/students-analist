@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block 'head' %}{% endblock %}
+{% block 'head' %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+{% endblock %}
 
 
 {% block 'title' %}Logos - {{ aluno.nome }}{% endblock %}
@@ -75,6 +78,26 @@
                             {% endfor %}
                         </ul>
                     </div>
+                {% endif %}
+
+                <!-- Gráfico de notas por matéria -->
+                {% if aluno.notas.all %}
+                <div class="mt-6 rounded-xl border border-blue-100 bg-blue-50/50 p-4">
+                    <p class="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-3">
+                        Evolução por matéria
+                    </p>
+                    <canvas id="notasChart" height="180"></canvas>
+                </div>
+
+                <!-- Só os dados vêm do Django. A lógica do gráfico mora no arquivo externo. -->
+                <script type="application/json" id="disciplinas-data">
+                    [
+                        {% for nota in aluno.notas.all %}
+                        { "nome": "{{ nota.disciplina|escapejs }}", "nota1": {{ nota.nota1 }}, "nota2": {{ nota.nota2 }} }{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ]
+                </script>
+                <script src="{% static 'js/notas_chart.js' %}"></script>
                 {% endif %}
 
                 <h2 class="text-xs font-semibold text-blue-700 uppercase tracking-wide mt-8 mb-3">
