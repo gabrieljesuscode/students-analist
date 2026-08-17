@@ -7,55 +7,56 @@
 
 
 {% block 'body' %}
-    <div class="flex flex-col items-center min-h-screen p-6">
+    <div class="p-4 sm:p-6">
 
-        <div class="w-full max-w-3xl bg-white rounded-lg shadow border border-gray-200">
+        <div class="w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-md border border-blue-100 overflow-hidden">
 
             <!-- Header -->
-            <header class="border-b border-gray-200 p-6 text-center">
-                <h1 class="text-xl font-bold text-gray-800">LOGOS</h1>
-                <p class="text-gray-500 text-sm">Acompanhamento Acadêmico</p>
+            <header class="bg-blue-100/60 border-b border-blue-100 p-6 sm:p-8 text-center">
+                <div class="w-10 h-1.5 bg-yellow-300 rounded-full mx-auto mb-3"></div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-blue-700 tracking-tight">LOGOS</h1>
+                <p class="text-blue-500 text-sm mt-1">Acompanhamento Acadêmico</p>
             </header>
 
             <!-- Cards de resumo -->
-            <div class="grid grid-cols-3 divide-x divide-gray-200 border-b border-gray-200">
-                <div class="p-4 text-center">
-                    <p class="text-xs text-gray-500 uppercase">Alunos</p>
-                    <p class="text-2xl font-bold text-gray-800">{{ total_alunos }}</p>
+            <div class="grid grid-cols-3 gap-px bg-blue-100 border-b border-blue-100">
+                <div class="bg-white p-3 sm:p-4 text-center">
+                    <p class="text-[10px] sm:text-xs text-blue-500 font-medium uppercase tracking-wide">Alunos</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-800 mt-1">{{ total_alunos }}</p>
                 </div>
-                <div class="p-4 text-center">
-                    <p class="text-xs text-gray-500 uppercase">Em risco</p>
-                    <p class="text-2xl font-bold text-red-600">{{ total_risco }}</p>
+                <div class="bg-white p-3 sm:p-4 text-center">
+                    <p class="text-[10px] sm:text-xs text-blue-500 font-medium uppercase tracking-wide">Em risco</p>
+                    <p class="text-xl sm:text-2xl font-bold text-red-600 mt-1">{{ total_risco }}</p>
                 </div>
-                <div class="p-4 text-center">
-                    <p class="text-xs text-gray-500 uppercase">Situação OK</p>
-                    <p class="text-2xl font-bold text-green-600">{{ total_ok }}</p>
+                <div class="bg-white p-3 sm:p-4 text-center">
+                    <p class="text-[10px] sm:text-xs text-blue-500 font-medium uppercase tracking-wide">Situação OK</p>
+                    <p class="text-xl sm:text-2xl font-bold text-green-600 mt-1">{{ total_ok }}</p>
                 </div>
             </div>
 
             <!-- Lista de alunos -->
-            <main class="p-6">
-                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-3">Alunos</h2>
+            <main class="p-4 sm:p-6">
+                <h2 class="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-3">Alunos</h2>
 
-                <div class="divide-y divide-gray-200">
+                <div class="divide-y divide-blue-100">
                     {% for aluno in alunos %}
-                    <div class="flex items-center justify-between py-3 ">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 py-3">
                         <div class="flex-1">
-                            <p class="font-medium text-gray-800"><a href="{% url 'detalhe_aluno' aluno.id %}">{{ aluno.nome }}</a></p>
+                            <p class="font-medium text-gray-800">
+                                <a href="{% url 'detalhe_aluno' aluno.id %}" class="hover:text-blue-600">{{ aluno.nome }}</a>
+                            </p>
                             <p class="text-xs text-gray-500">{{ aluno.turma }}</p>
                         </div>
 
-                        <div class="w-16 text-center text-sm text-gray-600">
-                            {{ aluno.frequencia }}%
-                        </div>
+                        <div class="flex items-center justify-between sm:justify-end sm:w-44 gap-3">
+                            <span class="text-sm text-gray-600 sm:w-16 sm:text-center">{{ aluno.frequencia }}%</span>
 
-                        <div class="w-28 text-right">
                             {% if aluno.status == "OK" %}
-                            <span class="inline-block px-2 py-1 text-xs font-medium rounded bg-green-100 text-green-700">
+                            <span class="inline-block px-2.5 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
                                 ✅ OK
                             </span>
                             {% else %}
-                            <span class="inline-block px-2 py-1 text-xs font-medium rounded bg-red-100 text-red-700">
+                            <span class="inline-block px-2.5 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700">
                                 🔴 ATENÇÃO
                             </span>
                             {% endif %}
