@@ -1,13 +1,12 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ aluno.nome }} - Logos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+{% block 'head' %}{% endblock %}
 
+
+{% block 'title' %}Logos - {{ aluno.nome }}{% endblock %}
+
+
+{% block 'body' %}
 <body class="bg-gray-100">
 
     <div class="min-h-screen p-6">
@@ -54,7 +53,7 @@
 
                         {% if aluno.esta_em_risco %}
                             <p class="text-2xl font-bold text-red-600">
-                                🔴 EM RISCO
+                                🔴 ATENÇÃO
                             </p>
                         {% else %}
                             <p class="text-2xl font-bold text-green-600">
@@ -64,6 +63,24 @@
                     </div>
 
                 </div>
+           
+
+                <!-- Lista de motivos de risco se houver -->
+                {% if aluno.esta_em_risco %}
+                    <p class="text-md font-semibold text-red-600 mt-4">
+                        Motivos de atenção:
+                    </p>
+                    <ul>
+
+                        {% for motivo in aluno.motivos_risco %}
+    
+                            <li class=" text-sm">
+                                - {{ motivo }}
+                            </li>
+                        
+                            {% endfor %}
+                        </ul>
+                {% endif %}
 
                 <h2 class="text-lg font-semibold mt-8 mb-4">
                     Notas
@@ -101,11 +118,10 @@
 
                 </div>
 
-            </main>
-
-        </div>
+                </main>
+                
+            </div>
 
     </div>
 
-</body>
-</html>
+{% endblock %}

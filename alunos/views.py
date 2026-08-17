@@ -13,8 +13,19 @@ def dashboard(request):
 		else:
 			aluno.status = "OK"
 
+	total_alunos = alunos.count()
+
+	total_risco = sum(
+		1 for aluno in alunos if aluno.esta_em_risco()
+	)
+
+	total_ok = total_alunos - total_risco
+
 	return render(request, "dashboard.html", {
-		"alunos": alunos
+        "alunos": alunos,
+        "total_alunos": total_alunos,
+        "total_risco": total_risco,
+        "total_ok": total_ok,
 	})
 
 
